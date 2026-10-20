@@ -1,5 +1,6 @@
 
 namespace WinFormsHello.Services;
+using Newtonsoft.Json;
 
 internal sealed class MyHttpService
 {
@@ -22,6 +23,9 @@ internal sealed class MyHttpService
             string json = await httpClient.GetStringAsync(
                 "https://jsonplaceholder.typicode.com/users/1"
             );
+            MyJsonUser? user = JsonConvert.DeserializeObject<MyJsonUser>(json);
+            Console.WriteLine(user?.Name);
+            Console.WriteLine(user?.Id);
             return json;
         }
         catch (HttpRequestException ex)
