@@ -1,19 +1,36 @@
-WinFormsHello 실행 방법
+# WinFormsHello
 
-1. Windows에 .NET 10 SDK가 설치되어 있는지 확인
-   dotnet --version
+C# WinForms 기반의 간단한 Windows 데스크톱 애플리케이션 연습 프로젝트입니다.
 
-2. 압축을 푼 폴더에서 PowerShell 또는 CMD 실행
+## 개발 환경
 
-3. 실행
-   dotnet run
+- Windows
+- .NET 10 SDK
+- Visual Studio Code
 
-창 하나가 열리고 "Hello, C# WinForms!"가 표시됩니다.
+## 실행 방법
 
-빌드만 하려면:
-   dotnet build
+```bash
+# .NET SDK 버전 확인
+dotnet --version
 
-주의:
-- Windows Forms이므로 Windows에서 실행하세요.
-- Visual Studio는 필요하지 않습니다.
-- VS Code 같은 편집기도 필수는 아닙니다.
+# 프로젝트 실행
+dotnet run
+```
+
+## 빌드
+
+```bash
+dotnet build
+```
+
+## 주요 기능
+
+- WinForms 기반 GUI
+- 버튼 클릭 이벤트 처리
+- HTTP API 요청 및 응답 데이터 표시
+
+## 참고
+
+- Windows 환경에서만 실행 가능합니다.
+- Visual Studio 없이 VS Code와 .NET CLI로 개발할 수 있습니다.
