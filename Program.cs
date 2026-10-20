@@ -8,19 +8,34 @@ internal static class Program
     static void Main()
     {
         ApplicationConfiguration.Initialize();
+        MyLayout.Instance.InitBody(800, 800);
+        InitSystem();
+        Application.Run(MyLayout.Instance.MyForm);
+    }
 
-        MyLayout myLayout = new MyLayout();
-
-        myLayout.InitBody(400, 200);
-
+    static void InitSystem()
+    {
         var label = new Label
         {
             Text = "Hello, C# WinForms!",
             AutoSize = true,
-            Font = new Font("Segoe UI", 16),
+            Font = new Font("Segoe UI", 12),
             Location = new Point(90, 75)
         };
-        myLayout.MyForm!.Controls.Add(label);
-        Application.Run(myLayout.MyForm);
+
+        var resultBox = new TextBox
+        {
+            Multiline = true,
+            ReadOnly = true,
+            ScrollBars = ScrollBars.Vertical,
+            Location = new Point(90, 200),
+            Size = new Size(600, 400)
+        };  
+        ButtonLayout buttonLayout = new ButtonLayout();
+        buttonLayout.BuildButton(resultBox);
+
+        MyLayout.Instance.MyForm!.Controls.Add(label);      
+        MyLayout.Instance.MyForm!.Controls.Add(resultBox);  
+        MyLayout.Instance.MyForm!.Controls.Add(buttonLayout.MyButton);        
     }
 }

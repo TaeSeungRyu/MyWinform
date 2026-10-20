@@ -1,18 +1,25 @@
-using System.Drawing;
-
 
 namespace WinFormsHello;
 
-internal class MyLayout
+internal sealed class MyLayout
 {
-    public Form? MyForm { get; private set; }
+    // 싱글톤 인스턴스
+    public static MyLayout Instance { get; } = new MyLayout();
+
+    // Form
+    public Form MyForm { get; private set; } = null!;
+
+    // 외부에서 객체 생성 방지
+    private MyLayout()
+    {
+    }
 
     public void InitHead(int colorCode)
     {
         // 추후 구현
     }
 
-    public void InitBody(int width, int height)
+    public void InitBody(int width = 300, int height = 300)
     {
         MyForm = new Form
         {
