@@ -1,6 +1,4 @@
-using System;
-using System.Drawing;
-using System.Windows.Forms;
+
 
 namespace WinFormsHello;
 
@@ -11,12 +9,9 @@ internal static class Program
     {
         ApplicationConfiguration.Initialize();
 
-        var form = new Form
-        {
-            Text = "WinForms 연습",
-            StartPosition = FormStartPosition.CenterScreen,
-            ClientSize = new Size(400, 200)
-        };
+        MyLayout myLayout = new MyLayout();
+
+        myLayout.InitBody(400, 200);
 
         var label = new Label
         {
@@ -25,8 +20,7 @@ internal static class Program
             Font = new Font("Segoe UI", 16),
             Location = new Point(90, 75)
         };
-
-        form.Controls.Add(label);
-        Application.Run(form);
+        myLayout.MyForm!.Controls.Add(label);
+        Application.Run(myLayout.MyForm);
     }
 }
