@@ -26,6 +26,9 @@ internal sealed class MyHttpService
             MyJsonUser? user = JsonConvert.DeserializeObject<MyJsonUser>(json);
             Console.WriteLine(user?.Name);
             Console.WriteLine(user?.Id);
+            MyLogger.Debug("HTTP 응답: " + json);
+            MyLogger.Info("HTTP 요청 성공");
+
             return json;
         }
         catch (HttpRequestException ex)

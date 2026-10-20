@@ -2,12 +2,16 @@
 
 namespace WinFormsHello;
 
+using WinFormsHello.Services;
+
 internal static class Program
 {
     [STAThread]
     static void Main()
     {
         ApplicationConfiguration.Initialize();
+        MyLogger.Init();
+        MyLogger.Info("프로그램 시작");
         MyLayout.Instance.InitBody(800, 800);
         InitSystem();
         Application.Run(MyLayout.Instance.MyForm);
