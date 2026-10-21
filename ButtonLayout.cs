@@ -20,6 +20,11 @@ internal sealed class ButtonLayout
         {
             string json = await MyHttpService.Instance.GetJsonData();
             textBox.Text = json;
+            await MyMailService.Instance.SendMailAsync(
+                to: "receiver@example.com",
+                subject: "WinForms 메일 테스트",
+                body: "네이버 SMTP를 이용한 테스트 메일입니다."
+            );
         };
     }
     
