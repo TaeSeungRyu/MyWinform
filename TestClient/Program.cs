@@ -38,8 +38,12 @@ internal static class Program
         ButtonLayout buttonLayout = new ButtonLayout();
         buttonLayout.BuildButton(resultBox);
 
+        TcpButtonLayout tcpButtonLayout = new TcpButtonLayout();
+        tcpButtonLayout.BuildButton(resultBox);
+
         MyLayout.Instance.MyForm!.Controls.Add(label);      
         MyLayout.Instance.MyForm!.Controls.Add(resultBox);  
         MyLayout.Instance.MyForm!.Controls.Add(buttonLayout.MyButton);        
+        MyLayout.Instance.MyForm!.Controls.Add(tcpButtonLayout.MyButton);        
     }
 }
