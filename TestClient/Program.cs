@@ -2,6 +2,7 @@
 
 namespace WinFormsHello;
 
+using WinFormsHello.Forms;
 using WinFormsHello.Services;
 
 internal static class Program
@@ -41,9 +42,16 @@ internal static class Program
         TcpButtonLayout tcpButtonLayout = new TcpButtonLayout();
         tcpButtonLayout.BuildButton(resultBox);
 
+        NormalButtonLayout normalButtonLayout = new NormalButtonLayout("토스트",left:400,top:120, onConfirm: () =>
+        {
+            AlertModal modal = new AlertModal("Alert 창 띄우기!");
+            modal.ShowDialogAsync();
+        });
+
         MyLayout.Instance.MyForm!.Controls.Add(label);      
         MyLayout.Instance.MyForm!.Controls.Add(resultBox);  
         MyLayout.Instance.MyForm!.Controls.Add(buttonLayout.MyButton);        
-        MyLayout.Instance.MyForm!.Controls.Add(tcpButtonLayout.MyButton);        
+        MyLayout.Instance.MyForm!.Controls.Add(tcpButtonLayout.MyButton);     
+        MyLayout.Instance.MyForm!.Controls.Add(normalButtonLayout.MyButton);           
     }
 }
