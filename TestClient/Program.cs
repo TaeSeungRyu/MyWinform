@@ -47,17 +47,25 @@ internal static class Program
             //모달 띄우기 연습
             using AlertModal modal = new AlertModal("Alert 창 띄우기!");
             modal.ShowDialog();
-
             //인터페이스 상속하여 테스트
             using IDisposable resource = new MyTestResource("IDisposable로 받기");
             using MyTestResource resource2 = new MyTestResource("MyTestResource로 받기");
-
         });
+
+
+        NormalButtonLayout normalButtonLayout2 = new NormalButtonLayout("컨트롤 모달 실행",left:550,top:120, onConfirm: () =>
+        {
+            //모달 띄우기 연습
+            using ControlsModal modal = new ControlsModal();
+            modal.ShowDialog();
+        });
+
 
         MyLayout.Instance.MyForm!.Controls.Add(label);      
         MyLayout.Instance.MyForm!.Controls.Add(resultBox);  
         MyLayout.Instance.MyForm!.Controls.Add(buttonLayout.MyButton);        
         MyLayout.Instance.MyForm!.Controls.Add(tcpButtonLayout.MyButton);     
         MyLayout.Instance.MyForm!.Controls.Add(normalButtonLayout.MyButton);           
+        MyLayout.Instance.MyForm!.Controls.Add(normalButtonLayout2.MyButton);      
     }
 }
