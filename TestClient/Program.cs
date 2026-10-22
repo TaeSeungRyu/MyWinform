@@ -44,8 +44,14 @@ internal static class Program
 
         NormalButtonLayout normalButtonLayout = new NormalButtonLayout("토스트",left:400,top:120, onConfirm: () =>
         {
-            AlertModal modal = new AlertModal("Alert 창 띄우기!");
-            modal.ShowDialogAsync();
+            //모달 띄우기 연습
+            using AlertModal modal = new AlertModal("Alert 창 띄우기!");
+            modal.ShowDialog();
+
+            //인터페이스 상속하여 테스트
+            using IDisposable resource = new MyTestResource("IDisposable로 받기");
+            using MyTestResource resource2 = new MyTestResource("MyTestResource로 받기");
+
         });
 
         MyLayout.Instance.MyForm!.Controls.Add(label);      
