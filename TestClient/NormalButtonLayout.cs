@@ -24,7 +24,13 @@ internal sealed class NormalButtonLayout
         MyButton = new Button
         {
             Text = _buttonText,
-            Location = new Point(_left, _top)
+            Location = new Point(_left, _top),
+            AutoSize = true,
+            // 버튼 내부 여백 
+            // 왼쪽, 위, 오른쪽, 아래
+            Padding = new Padding(5, 2, 5, 2),
+            // 버튼 외부 여백
+            Margin = new Padding(5)            
         };
         MyButton.Click += async (sender, e) =>
         {
