@@ -73,6 +73,13 @@ internal static class Program
             //모달 띄우기 연습
             using ResponsiveModal modal = new ResponsiveModal();
             modal.ShowDialog();
+        });               
+
+        NormalButtonLayout normalButtonLayout5 = new NormalButtonLayout("로그인폼",left:700,top:60, onConfirm: () =>
+        {
+            //모달 띄우기 연습
+            using LoginForm modal = new LoginForm();
+            modal.ShowDialog();
         });                
 
 
@@ -84,5 +91,6 @@ internal static class Program
         MyLayout.Instance.MyForm!.Controls.Add(normalButtonLayout2.MyButton);      
         MyLayout.Instance.MyForm!.Controls.Add(normalButtonLayout3.MyButton);      
         MyLayout.Instance.MyForm!.Controls.Add(normalButtonLayout4.MyButton);      
+        MyLayout.Instance.MyForm!.Controls.Add(normalButtonLayout5.MyButton);      
     }
 }
