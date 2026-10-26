@@ -25,7 +25,7 @@ internal static class Program
             Text = "Hello, C# WinForms!",
             AutoSize = true,
             Font = new Font("Segoe UI", 12),
-            Location = new Point(90, 75)
+            Location = new Point(90, 25)
         };
 
         var resultBox = new TextBox
@@ -68,6 +68,14 @@ internal static class Program
         });        
 
 
+        NormalButtonLayout normalButtonLayout4 = new NormalButtonLayout("반응형 같은 모달 실행",left:100,top:60, onConfirm: () =>
+        {
+            //모달 띄우기 연습
+            using ResponsiveModal modal = new ResponsiveModal();
+            modal.ShowDialog();
+        });                
+
+
         MyLayout.Instance.MyForm!.Controls.Add(label);      
         MyLayout.Instance.MyForm!.Controls.Add(resultBox);  
         MyLayout.Instance.MyForm!.Controls.Add(buttonLayout.MyButton);        
@@ -75,5 +83,6 @@ internal static class Program
         MyLayout.Instance.MyForm!.Controls.Add(normalButtonLayout.MyButton);           
         MyLayout.Instance.MyForm!.Controls.Add(normalButtonLayout2.MyButton);      
         MyLayout.Instance.MyForm!.Controls.Add(normalButtonLayout3.MyButton);      
+        MyLayout.Instance.MyForm!.Controls.Add(normalButtonLayout4.MyButton);      
     }
 }

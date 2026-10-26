@@ -13,17 +13,28 @@ public class FlowPracticeModal : BaseModalForm
 
     protected override void InitControls()
     {
+        
+        // 중앙 정렬을 위한 부모 컨테이너
+        TableLayoutPanel container = new TableLayoutPanel
+        {
+            Dock = DockStyle.Fill,
+            ColumnCount = 1,
+            RowCount = 1
+        };
+        
         // UI 요소를 순서대로 자동 배치하는 패널 생성
         FlowLayoutPanel panel = new FlowLayoutPanel
         {
             // 부모 Form의 사용 가능한 영역을 모두 채움
             // CSS의 width: 100%; height: 100%와 비슷
-            Dock = DockStyle.Fill,
-
+            //Dock = DockStyle.Fill,
+            AutoSize = true,
             // UI 요소를 왼쪽에서 오른쪽 순서로 배치
             // CSS의 flex-direction: row와 비슷
             FlowDirection = FlowDirection.LeftToRight,
-
+            Anchor = AnchorStyles.None, // 가운데 정렬의 핵심
+            AutoSizeMode = AutoSizeMode.GrowAndShrink,
+            
             // 공간이 부족하면 자동으로 다음 줄에 배치
             // CSS의 flex-wrap: wrap과 비슷
             WrapContents = true,
@@ -50,7 +61,10 @@ public class FlowPracticeModal : BaseModalForm
             }
             panel.Controls.Add(button);
         }
+        // 컨테이너에 패널 추가
+        container.Controls.Add(panel, 0, 0);
 
-        Controls.Add(panel);
+        // Form에 컨테이너 추가
+        Controls.Add(container);
     }
 }
