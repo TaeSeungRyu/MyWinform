@@ -44,7 +44,7 @@ public class ResponsiveModal : BaseModalForm
         //샘플 IP 입력
         TextBox hostInput = new TextBox
         {
-            Text = "127.0.0.1",
+            Text = "127.1.1.1",
             Dock = DockStyle.Fill
         };
 
