@@ -4,13 +4,33 @@ namespace WinFormsHello;
 
 using WinFormsHello.Forms;
 using WinFormsHello.Services;
+using Microsoft.Extensions.DependencyInjection;
+using WinFormsHello.State;
 
 internal static class Program
 {
+
+    // 앱 전체에서 사용할 DI 컨테이너
+    public static IServiceProvider Services { get; private set; } = null!;
+
     [STAThread]
     static void Main()
     {
         ApplicationConfiguration.Initialize();
+
+        // DI 컨테이너 설정
+        var services = new ServiceCollection();
+
+        // 1. 상태를 Singleton으로 등록
+        services.AddSingleton<UserNameState>();
+
+        // 2. DI 컨테이너 생성
+        using var provider = services.BuildServiceProvider();
+        Services = provider;
+
+        // Form 등록
+        services.AddTransient<MyLayout>();
+
         MyLogger.Init();
         MyLogger.Info("프로그램 시작");
         MyLayout.Instance.InitBody(800, 800);
@@ -92,5 +112,14 @@ internal static class Program
         MyLayout.Instance.MyForm!.Controls.Add(normalButtonLayout3.MyButton);      
         MyLayout.Instance.MyForm!.Controls.Add(normalButtonLayout4.MyButton);      
         MyLayout.Instance.MyForm!.Controls.Add(normalButtonLayout5.MyButton);      
+
+
+        //**** 상태 구독(subscribe)하기! ****
+        var state = Services.GetRequiredService<UserNameState>();
+        state.UserNameChanged += (userName) =>
+        {
+            resultBox.Text = userName;
+        };        
+        
     }
 }

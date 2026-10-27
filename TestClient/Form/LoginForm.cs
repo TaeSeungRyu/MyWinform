@@ -1,6 +1,9 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using WinFormsHello;
+using WinFormsHello.State;
+using Microsoft.Extensions.DependencyInjection;
 
 public class LoginForm : Form
 {
@@ -38,6 +41,10 @@ public class LoginForm : Form
 
     private TableLayoutPanel CreateLoginPanel()
     {
+
+        //**** 상태 받아보기 ****
+        var state = Program.Services.GetRequiredService<UserNameState>();
+        
         TableLayoutPanel panel = new TableLayoutPanel
         {
             Width = 320,
@@ -109,6 +116,12 @@ public class LoginForm : Form
         panel.Controls.Add(_passwordInput, 0, 4);
 
         panel.Controls.Add(loginButton, 0, 5);
+
+        _idInput.TextChanged += (sender, e) =>
+        {
+            //**** 상태 변경을 publish 하기 ****
+            state.UserName = _idInput.Text;
+        };
 
         return panel;
     }
