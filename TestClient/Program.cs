@@ -24,12 +24,12 @@ internal static class Program
         // 1. 상태를 Singleton으로 등록
         services.AddSingleton<UserNameState>();
 
+        // Form 등록
+        services.AddTransient<MyLayout>();        
+
         // 2. DI 컨테이너 생성
         using var provider = services.BuildServiceProvider();
         Services = provider;
-
-        // Form 등록
-        services.AddTransient<MyLayout>();
 
         MyLogger.Init();
         MyLogger.Info("프로그램 시작");
@@ -116,10 +116,23 @@ internal static class Program
 
         //**** 상태 구독(subscribe)하기! ****
         var state = Services.GetRequiredService<UserNameState>();
-        state.UserNameChanged += (userName) =>
+        // state.UserNameChanged += (userName) =>
+        // {
+        //     resultBox.Text = userName;
+        // };        
+
+        var bindingSource = new BindingSource
         {
-            resultBox.Text = userName;
-        };        
-        
+            DataSource = state
+        };
+
+        label.DataBindings.Add(
+            "Text",
+            bindingSource,
+            nameof(UserNameState.UserName),
+            true,
+            DataSourceUpdateMode.Never
+        );    
+                
     }
 }
