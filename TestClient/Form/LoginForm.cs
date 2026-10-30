@@ -18,6 +18,7 @@ public class LoginForm : Form
         StartPosition = FormStartPosition.CenterScreen;
         BackColor = Color.WhiteSmoke;
         InitControls();
+        InitEvent();
     }
 
     private void InitControls()
@@ -37,6 +38,30 @@ public class LoginForm : Form
         root.Controls.Add(loginPanel, 0, 0);
 
         Controls.Add(root);
+    }
+
+    private void InitEvent()
+    {
+        // 라이프사이클 이벤트 등록!
+        Load += (sender, e) =>
+        {
+            Console.WriteLine("[LoginForm] Load");
+        };
+
+        Shown += (sender, e) =>
+        {
+            Console.WriteLine("[LoginForm] Shown");
+        };
+
+        FormClosing += (sender, e) =>
+        {
+            Console.WriteLine("[LoginForm] FormClosing");
+        };
+
+        FormClosed += (sender, e) =>
+        {
+            Console.WriteLine("[LoginForm] FormClosed");
+        };        
     }
 
     private TableLayoutPanel CreateLoginPanel()
