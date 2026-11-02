@@ -61,6 +61,22 @@ public class LoginForm : Form
         FormClosed += (sender, e) =>
         {
             Console.WriteLine("[LoginForm] FormClosed");
+        };   
+
+        //종료 전 묻기     
+        FormClosing += (sender, e) =>
+        {
+            DialogResult result = MessageBox.Show(
+                "정말 종료하시겠습니까?",
+                "종료 확인",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
+
+            if (result == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
         };        
     }
 
