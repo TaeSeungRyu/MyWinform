@@ -63,6 +63,34 @@ public class LoginForm : Form
             Console.WriteLine("[LoginForm] FormClosed");
         };   
 
+        // 로그인 창이 활성화될 때
+        Activated += (sender, e) =>
+        {
+            Console.WriteLine("로그인 창 활성화!");
+            BackColor = Color.White;  //색 확인 필요!
+        };
+
+        // 로그인 창이 비활성화될 때
+        Deactivate += (sender, e) =>
+        {
+            Console.WriteLine("로그인 창 비활성화!");
+            BackColor = Color.LightGray; //색 확인 필요!
+        };       
+
+        //리사이징 이벤트 
+        Resize += (sender, e) =>
+        {
+            Console.WriteLine($"가로: {Width}, 세로: {Height}");
+            if (Width < 600)
+            {
+                Text = "작은 로그인 창";
+            }
+            else
+            {
+                Text = "로그인";
+            }            
+        };        
+
         //종료 전 묻기     
         FormClosing += (sender, e) =>
         {
