@@ -88,7 +88,19 @@ public class LoginForm : Form
             else
             {
                 Text = "로그인";
-            }            
+            }
+            if (WindowState == FormWindowState.Minimized)
+            {
+                Console.WriteLine("창 최소화!");
+            }
+            else if (WindowState == FormWindowState.Maximized)
+            {
+                Console.WriteLine("창 최대화!");
+            }
+            else
+            {
+                Console.WriteLine("일반 창 상태!");
+            }                        
         };        
 
         //종료 전 묻기     

@@ -13,6 +13,9 @@ internal static class Program
     // 앱 전체에서 사용할 DI 컨테이너
     public static IServiceProvider Services { get; private set; } = null!;
 
+    private static System.Windows.Forms.Timer _timer = null!;
+    private static Label _clockLabel = null!;
+
     [STAThread]
     static void Main()
     {
@@ -35,6 +38,7 @@ internal static class Program
         MyLogger.Info("프로그램 시작");
         MyLayout.Instance.InitBody(800, 800);
         InitSystem();
+        InitTimer();
         Application.Run(MyLayout.Instance.MyForm);
     }
 
@@ -134,5 +138,36 @@ internal static class Program
             DataSourceUpdateMode.Never
         );    
                 
+    }
+
+    static void InitTimer()
+    {
+        _clockLabel = new Label
+        {
+            AutoSize = true,
+            Location = new Point(40, 700),
+            Font = new Font("맑은 고딕", 14),
+            Text = DateTime.Now.ToString("HH:mm:ss")
+        };
+
+        MyLayout.Instance.MyForm!.Controls.Add(_clockLabel); 
+
+        _timer = new System.Windows.Forms.Timer
+        {
+            Interval = 1000 // 1초
+        };
+
+        _timer.Tick += (sender, e) =>
+        {
+            _clockLabel.Text = DateTime.Now.ToString("HH:mm:ss");
+        };
+
+        _timer.Start();
+        // 메인 Form이 Dispose될 때 Timer 정리
+        MyLayout.Instance.MyForm!.Disposed += (sender, e) =>
+        {
+            _timer.Stop();
+            _timer.Dispose();
+        };   
     }
 }
