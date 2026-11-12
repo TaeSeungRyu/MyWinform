@@ -16,6 +16,8 @@ internal static class Program
     private static System.Windows.Forms.Timer _timer = null!;
     private static Label _clockLabel = null!;
 
+    private static NotifyIcon _notifyIcon = null!;
+
     [STAThread]
     static void Main()
     {
@@ -39,6 +41,8 @@ internal static class Program
         MyLayout.Instance.InitBody(800, 800);
         InitSystem();
         InitTimer();
+        InitNotifyIcon();
+        InitFormClosing();
         Application.Run(MyLayout.Instance.MyForm);
     }
 
@@ -169,5 +173,52 @@ internal static class Program
             _timer.Stop();
             _timer.Dispose();
         };   
+    }
+
+    //클로징 이벤트 변경(가리기로)
+    static void InitFormClosing()
+    {
+        var form = MyLayout.Instance.MyForm!;
+
+        form.FormClosing += (sender, e) =>
+        {
+            e.Cancel = true;
+            form.Hide();
+        };
+    }    
+
+    //트레이 아이콘 연습
+    static void InitNotifyIcon()
+    {
+        // 우클릭 메뉴 생성
+        ContextMenuStrip menu = new ContextMenuStrip();
+        menu.Items.Add("창 열기", null, (sender, e) =>
+        {
+            var form = MyLayout.Instance.MyForm!;
+            form.Show();
+            if (form.WindowState == FormWindowState.Minimized)
+                form.WindowState = FormWindowState.Normal;
+            form.Activate();
+        });
+        menu.Items.Add("종료", null, (sender, e) =>
+        {
+            Application.Exit();
+        });
+
+        _notifyIcon = new NotifyIcon
+        {
+            Icon = SystemIcons.Application,
+            Text = "WinForms 학습 프로그램",
+            Visible = true,  //MyLayout.Instance.MyForm.Controls.Add(_notifyIcon); // <---- 이런식으로 할 필요가 없다(❌)
+            ContextMenuStrip = menu //연결
+        };
+
+        // 메인 Form이 종료되면 아이콘 정리
+        MyLayout.Instance.MyForm!.Disposed += (sender, e) =>
+        {
+            //_notifyIcon.Visible = false;
+            // _notifyIcon.Dispose();
+            // menu.Dispose();
+        };
     }
 }
